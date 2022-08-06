@@ -1,4 +1,25 @@
 
 body {
     text-align: center;
+    padding: 40px;
+    background-color: aliceblue;
+}
+
+.winner-title {
+    font-size: 450%;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.winner-title > img {
+    width: 150px;
+    height: auto;
+    margin: 0px 120px;
+}
+
+.winner-title-text {
+    padding-top: 35px;
+    color: gray;
 }
