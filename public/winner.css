@@ -5,6 +5,10 @@ body {
     background-color: aliceblue;
 }
 
+
+/**
+ * Title
+ */
 .winner-title {
     font-size: 450%;
     display: flex;
@@ -22,4 +26,20 @@ body {
 .winner-title-text {
     padding-top: 35px;
     color: gray;
+}
+
+/**
+ *  
+ */
+
+ #winner {
+    padding-top: 90px;
+ }
+
+#winner > img {
+    border-radius: 50%;
+    height: 250px;
+    width: auto;
+    border-radius: 50%;
+    height: 375px
 }

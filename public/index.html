@@ -1,23 +1,68 @@
 <!DOCTYPE html>
 <html>
-    <head></head>
-    <link rel="stylesheet" href="style.css">
 
-    <body>
+    <head>
+
+        <script>
+    
+            async function fetchPlayers() {
+                return [{ name: 'Chris Tenud', image: 'assets/portrait-fallback.png'}]
+            }
+
+            function determineWinner(players) {
+                return players[0]
+            }
+
+            function showWinner(players) {
+                const winner = determineWinner(players)
+                const winnerEl = document.getElementById('winner')
+                showPlayer(winnerEl, winner)
+            }
+
+            function E(tag) {
+                return document.createElement(tag)
+            }
+
+            function showPlayer(targetEl, player) {
+                var img = new Image()
+                img.src = player.image
+
+                const nameEl = document.createElement('h2')
+                nameEl.innerHTML = player.name
+
+                targetEl.appendChild(img)
+                targetEl.appendChild(nameEl)
+
+            }
+
+            async function init() {
+                try {
+                    const players = await fetchPlayers()
+                    showWinner(players)
+                } catch(err) {
+                    console.error(err)
+                    alert('Page broken. Please open console and send Log to Silvan Bregy. Thanks.')
+                }
+            }
+
+        </script>
+    </head>
+    <link rel="stylesheet" href="winner.css">
+
+    <body onload="init()">
 
 
         <div class="winner-title">
-            <img src="assets/smoke-forbidden-2.gif">
+            <img src="assets/smoke-forbidden-1.gif">
 
             <div class="winner-title-text">Smoke Stop</div>
-            <img src="assets/smoke-forbidden-2.gif">
+            <img src="assets/smoke-forbidden-1.gif">
 
-        
-        
         </div>
 
+        <div id="winner">
 
-
+        </div>
 
     </body>
 

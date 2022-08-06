@@ -6,5 +6,5 @@
 interface player {
     name: string
     image?: string
-    betDate: Date
+    betDate: number
 }
