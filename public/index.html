@@ -5,8 +5,22 @@
 
         <script>
     
+            const PLAYER_IMAGE_FALLBACK = 'api/fallback/portrait'
+
+            function betTimeToString(time) {
+                const date = new Date()
+                date.setTime(time)
+
+                return `
+                    ${date.getDay()}.${date.getMonth()}.${date.getFullYear()}
+                `
+                
+            }
+
+
             async function fetchPlayers() {
-                return [{ name: 'Chris Tenud', image: 'assets/portrait-fallback.png'}]
+                const res = await fetch('/api/players')
+                return res.json()
             }
 
             function determineWinner(players) {
@@ -19,19 +33,26 @@
                 showPlayer(winnerEl, winner)
             }
 
-            function E(tag) {
-                return document.createElement(tag)
-            }
-
             function showPlayer(targetEl, player) {
+                let src = player.image
+                if(!src) {
+                    src = PLAYER_IMAGE_FALLBACK
+                }
                 var img = new Image()
-                img.src = player.image
+                img.src = src
 
                 const nameEl = document.createElement('h2')
-                nameEl.innerHTML = player.name
+                nameEl.innerHTML = `${player.name}`
+                nameEl.classList.add('winner-title')
 
+                const dateEl = document.createElement('h1')
+                dateEl.innerHTML = `Winning period: ${betTimeToString(player.betDate)} - ${betTimeToString(Date.now())}`
+
+                targetEl.innerHTML = ''
                 targetEl.appendChild(img)
                 targetEl.appendChild(nameEl)
+                targetEl.appendChild(dateEl)
+
 
             }
 
@@ -47,6 +68,7 @@
 
         </script>
     </head>
+
     <link rel="stylesheet" href="winner.css">
 
     <body onload="init()">
@@ -55,7 +77,7 @@
         <div class="winner-title">
             <img src="assets/smoke-forbidden-1.gif">
 
-            <div class="winner-title-text">Smoke Stop</div>
+            <div class="winner-title-text multicolortext">Smoke Stop</div>
             <img src="assets/smoke-forbidden-1.gif">
 
         </div>

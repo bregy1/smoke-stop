@@ -28,6 +28,13 @@ body {
     color: gray;
 }
 
+.multicolortext {
+    background-image: linear-gradient(to left, violet, indigo, green, blue, yellow, orange, red);
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
 /**
  *  
  */
@@ -42,4 +49,8 @@ body {
     width: auto;
     border-radius: 50%;
     height: 375px
+}
+
+.winner-title {
+    font-size: 450%;
 }
