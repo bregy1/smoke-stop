@@ -1,0 +1,10 @@
+*.PNG
+*.png
+*.jfif
+*.jpg
+*.jpeg
+*.exe
+tmp
+data
+db
+node_modules
