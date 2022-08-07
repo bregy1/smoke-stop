@@ -45,7 +45,7 @@ async function loadPlayers() {
     return players.map((p, i) => ({
         ...p,
         winPeriod: calcWinPeriod(p, i, players)
-    })).sort((p1, p2) => p1.betDate - p2.betDate)
+    })).sort((p1, p2) => p2.betDate - p1.betDate)
 }
 
 function determineWinner(players) {
@@ -138,18 +138,24 @@ function showPot(players) {
     const pot = players.reduce((acc, player) => {
         return acc + player.donation
     }, 0)
-    document.getElementById('pot').innerHTML = `Aktueller Gewinn $${pot}$`
+
+    document.getElementById('pot').innerHTML = `Aktueller Gewinn <span class="pot-number">$${pot}$</span>`
+}
+
+function showTodayDate() {
+    const target = document.getElementById('today')
+    target.innerHTML = `Datum heute: ${betTimeToString(Date.now())}`
 }
 
 async function fetchData() {
     PLAYERS = await loadPlayers()
     showPot(PLAYERS)
-    console.log('loaded players', PLAYERS)
     showWinner(PLAYERS)
 }
 
 async function init() {
     try {
+        showTodayDate()
         await fetchData()
     } catch (err) {
         console.error(err)

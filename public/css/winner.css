@@ -23,7 +23,7 @@ body {
     margin: 0px 120px;
 }
 .bed-date-title {
-    color: red;
+    color: orchid;
     font-size:50%;
 }
 .winner-title-text {
@@ -74,4 +74,19 @@ body {
 
 .winner-visualisation {
     background-color: lightgreen;
+}
+
+
+#today {
+    top: 5px;
+    left: 10px;
+    position: absolute;
+}
+
+
+.pot-number {
+    font-weight: bold;
+    font-size: 90%;
+    color: red;
+    background-color: black;
 }
