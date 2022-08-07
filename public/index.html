@@ -1,91 +1,44 @@
 <!DOCTYPE html>
 <html>
 
-    <head>
+<head>
+    <script type="text/javascript" src="js/winner.js"></script>
+    <script type="text/javascript" src="js/confetti.js"></script>
 
-        <script>
-    
-            const PLAYER_IMAGE_FALLBACK = 'api/fallback/portrait'
-
-            function betTimeToString(time) {
-                const date = new Date()
-                date.setTime(time)
-
-                return `
-                    ${date.getDay()}.${date.getMonth()}.${date.getFullYear()}
-                `
-                
-            }
+    <link rel="stylesheet" href="css/winner.css">
+    <link rel="stylesheet" href="css/confetti.css">
+    <link rel="stylesheet" href="css/arrow.css">
 
 
-            async function fetchPlayers() {
-                const res = await fetch('/api/players')
-                return res.json()
-            }
-
-            function determineWinner(players) {
-                return players[0]
-            }
-
-            function showWinner(players) {
-                const winner = determineWinner(players)
-                const winnerEl = document.getElementById('winner')
-                showPlayer(winnerEl, winner)
-            }
-
-            function showPlayer(targetEl, player) {
-                let src = player.image
-                if(!src) {
-                    src = PLAYER_IMAGE_FALLBACK
-                }
-                var img = new Image()
-                img.src = src
-
-                const nameEl = document.createElement('h2')
-                nameEl.innerHTML = `${player.name}`
-                nameEl.classList.add('winner-title')
-
-                const dateEl = document.createElement('h1')
-                dateEl.innerHTML = `Winning period: ${betTimeToString(player.betDate)} - ${betTimeToString(Date.now())}`
-
-                targetEl.innerHTML = ''
-                targetEl.appendChild(img)
-                targetEl.appendChild(nameEl)
-                targetEl.appendChild(dateEl)
+</head>
 
 
-            }
+<body onload="init()">
 
-            async function init() {
-                try {
-                    const players = await fetchPlayers()
-                    showWinner(players)
-                } catch(err) {
-                    console.error(err)
-                    alert('Page broken. Please open console and send Log to Silvan Bregy. Thanks.')
-                }
-            }
+    <canvas id="confetti-canvas"></canvas>
+    <div class="winner-title">
+        <img src="assets/smoke-forbidden-1.gif">
 
-        </script>
-    </head>
+        <div class="winner-title-text">Smoke Stop</div>
+        <img src="assets/smoke-forbidden-1.gif">
 
-    <link rel="stylesheet" href="winner.css">
-
-    <body onload="init()">
+    </div>
 
 
-        <div class="winner-title">
-            <img src="assets/smoke-forbidden-1.gif">
 
-            <div class="winner-title-text multicolortext">Smoke Stop</div>
-            <img src="assets/smoke-forbidden-1.gif">
+    <div class="players-wrap">
 
-        </div>
+        <a class="arrow-btn flip" onclick="showPreviousPlayer()">
+            <div class="arrow"></div>
+        </a>
 
-        <div id="winner">
+        <div id="winner-wrap"></div>
 
-        </div>
+        <a class="arrow-btn switch right" onclick="showNextPlayer()">
+            <div class="arrow"></div>
+        </a>
 
-    </body>
+    </div>
+</body>
 
 </html>

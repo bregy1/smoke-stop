@@ -1,0 +1,69 @@
+.arrow-btn {
+    background: dodgerblue;
+    padding: 3rem;
+    border-radius: 4rem;
+    background: dodgerblue;
+    cursor: pointer;
+    transition: 0.25s;
+    margin: 2rem;
+  }
+  .arrow-btn:active {
+    background: #005db7;
+    transition: 0;
+  }
+  
+  .arrow {
+    position: relative;
+    background: whitesmoke;
+    width: 4rem;
+    height: 0.4rem;
+    transition: 0.5s;
+    border-radius: 1rem;
+    transform-origin: right center;
+  }
+  .arrow:before {
+    transform: rotate(-35deg);
+  }
+  .arrow:after {
+    transform: rotate(35deg);
+  }
+  .arrow:before, .arrow:after {
+    display: block;
+    content: "";
+    position: absolute;
+    left: 0;
+    background: whitesmoke;
+    width: 2rem;
+    height: 0.4rem;
+    transform-origin: 0.2rem center;
+    transition: 0.5s;
+    border-radius: 1rem;
+  }
+  
+  .switch.right .arrow:before, .switch.right .arrow:after {
+    left: 3.8rem;
+  }
+  .switch.right .arrow:before {
+    transform: rotate(140deg);
+  }
+  .switch.right .arrow:after {
+    transform: rotate(-140deg);
+  }
+  
+  .flip {
+    transform: translateZ(1rem) perspective(600);
+  }
+  
+  .flip.right {
+    transform: translateZ(1rem) perspective(600) rotateY(180deg);
+  }
+
+  
+  .arrow-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: whitesmoke;
+    -webkit-backface-visibility: hidden;
+  }
+   

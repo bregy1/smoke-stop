@@ -3,6 +3,7 @@ body {
     text-align: center;
     padding: 40px;
     background-color: aliceblue;
+    
 }
 
 
@@ -39,18 +40,23 @@ body {
  *  
  */
 
- #winner {
+ .winner {
     padding-top: 90px;
  }
 
-#winner > img {
+.winner > img {
     border-radius: 50%;
-    height: 250px;
+     height: 250px;
+    border-radius: 50%;
     width: auto;
-    border-radius: 50%;
-    height: 375px
 }
 
 .winner-title {
     font-size: 450%;
+}
+
+.players-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

@@ -5,7 +5,6 @@ import { Config } from './config.js'
 import { getPlayers, randomAsset } from './db.js'
 import bodyParser from 'body-parser'
 
-
 var app = express()
 
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -35,9 +34,9 @@ app.get('/api/players', (req, res) => {
     })
 })
 
+
 app.get('/api/fallback/portrait', (req, res) => {
     handler(req, res, async () => {
-
         const asset = await randomAsset('fallback-portrait')
         res.sendFile(asset)
 
