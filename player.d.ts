@@ -8,4 +8,5 @@ interface player {
     image?: string
     betDate: number
     bedPeriod?: number[]
+    donation: number
 }

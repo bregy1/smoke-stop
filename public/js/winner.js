@@ -8,7 +8,7 @@ function betTimeToString(time, fallback) {
     if(time !== -1) {
         const date = new Date()
         date.setTime(time)
-        display = `${date.getDay()}.${date.getMonth()}.${date.getFullYear()}`
+        display = `${date.getDate()}.${date.getMonth()+1}.${date.getFullYear()}`
     }
 
     return `
@@ -17,17 +17,20 @@ function betTimeToString(time, fallback) {
 }
 
 
-const calcWinDay = (player, nextPlayer, defaultValue) => {
-    if(!player || !nextPlayer) return defaultValue
-    return player.betDate + (nextPlayer.betDate - player.betDate) / 2
+const calcFirstWinDay = (previousPlayer, player, defaultValue) => {
+    if(!player || !previousPlayer) return defaultValue
+    return player.betDate - ((player.betDate - previousPlayer.betDate) / 2)
 }
-
+const calcLastWinDay = (player, nextPlayer, defaultValue) => {
+    if(!player || !nextPlayer) return defaultValue
+    return player.betDate + ((nextPlayer.betDate - player.betDate) / 2)
+}
 const calcWinPeriod = (player, index, players) => {
     const nextPlayer = players[index+1]
-    const lastWinDay = calcWinDay(player, nextPlayer, -1)
+    const lastWinDay = calcLastWinDay(player, nextPlayer, -1)
  
     const previousPlayer = players[index-1]
-    const firstWinDay = calcWinDay(previousPlayer, player, -1)
+    const firstWinDay = calcFirstWinDay(previousPlayer, player, -1)
 
     return [firstWinDay, lastWinDay]
 }
@@ -42,7 +45,7 @@ async function loadPlayers() {
     return players.map((p, i) => ({
         ...p,
         winPeriod: calcWinPeriod(p, i, players)
-    })).sort((p1, p2) => p1.bedTime - p2.bedTime)
+    })).sort((p1, p2) => p1.betDate - p2.betDate)
 }
 
 function determineWinner(players) {
@@ -106,7 +109,13 @@ function playerView(player) {
     winnerEl.classList.add('winner')
 
     const nameEl = document.createElement('h2')
-    nameEl.innerHTML = `${player.name}`
+    nameEl.innerHTML = `${player.name}&nbsp;`
+
+    const bedDateEl  =document.createElement('div')
+    bedDateEl.classList.add('bed-date-title')
+    bedDateEl.innerHTML = `(${betTimeToString(player.betDate)})`
+    nameEl.appendChild(bedDateEl)
+
     nameEl.classList.add('winner-title')
     nameEl.classList.add('multicolortext')
 
@@ -125,9 +134,16 @@ let PLAYERS = []
 let SHOWN_PLAYER
 let WINNER
 
+function showPot(players) {
+    const pot = players.reduce((acc, player) => {
+        return acc + player.donation
+    }, 0)
+    document.getElementById('pot').innerHTML = `Aktueller Gewinn $${pot}$`
+}
+
 async function fetchData() {
     PLAYERS = await loadPlayers()
-
+    showPot(PLAYERS)
     console.log('loaded players', PLAYERS)
     showWinner(PLAYERS)
 }

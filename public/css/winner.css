@@ -22,7 +22,10 @@ body {
     height: auto;
     margin: 0px 120px;
 }
-
+.bed-date-title {
+    color: red;
+    font-size:50%;
+}
 .winner-title-text {
     padding-top: 35px;
     color: gray;
