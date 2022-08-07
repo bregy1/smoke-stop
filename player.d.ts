@@ -7,4 +7,5 @@ interface player {
     name: string
     image?: string
     betDate: number
+    bedPeriod?: number[]
 }

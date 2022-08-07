@@ -12,6 +12,10 @@
     transition: 0;
   }
   
+  .arrow-btn:hover {
+    background: #005db7;
+  }
+
   .arrow {
     position: relative;
     background: whitesmoke;

@@ -128,13 +128,3 @@ var removeConfetti; //call to stop the confetti animation and remove all confett
 		}
 	}
 })();
-
-
-
-function confettiAsInterval() {
-	startConfetti()
-	setTimeout(() => {
-		stopConfetti()
-		setTimeout(confettiAsInterval, 2000)
-	}, 3000)
-}

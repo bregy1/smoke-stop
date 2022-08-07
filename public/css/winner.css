@@ -3,7 +3,6 @@ body {
     text-align: center;
     padding: 40px;
     background-color: aliceblue;
-    
 }
 
 
@@ -59,4 +58,17 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.win-period {
+    font-size: 225%;
+}
+
+.win-date {
+    font-weight: bold;
+}
+
+
+.winner-visualisation {
+    background-color: lightgreen;
 }
